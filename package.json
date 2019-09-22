@@ -1,0 +1,20 @@
+{
+  "name": "easy-translate",
+  "description": "Easy Translate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "electron-json-storage": "^4.1.8"
+  },
+  "devDependencies": {
+    "electron": "^6.0.10",
+    "electron-builder": "^21.2.0",
+    "eslint": "^6.4.0"
+  }
+}
