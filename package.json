@@ -1,6 +1,6 @@
 {
-  "name": "easy-translate",
-  "description": "Easy Translate",
+  "name": "hotkey-translate",
+  "description": "Hotkey Translate",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
