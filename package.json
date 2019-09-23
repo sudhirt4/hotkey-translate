@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "build": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
+    "build": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --win --linux",
     "lint": "eslint ."
   },
   "dependencies": {
