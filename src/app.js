@@ -10,7 +10,18 @@ const { GOOGLE_TRANSLATE_URL } = require("./config");
 const { createSettingsWindow } = require("./settingsWindow");
 
 function showWindow(window, { position }) {
-  window.setPosition(position.x, position.y, false);
+  if(process.platform === "win32" ) {
+      let screenInfo = require("electron").screen.getPrimaryDisplay().size;
+      let windowWidth =  450;  // get this dynamically
+      let windowHeight = 500;  // get this dynamically
+
+      let x = parseInt(( (3 * screenInfo.width) / 4)) - parseInt(windowWidth/2);
+      let y = parseInt((screenInfo.height /2)) - parseInt(windowHeight/2);
+      window.setPosition(x, y, false);
+
+  }else{
+      window.setPosition(position.x, position.y, false);
+  }
   window.show();
   window.focus();
 }
@@ -28,7 +39,12 @@ function startApp() {
   });
   autoUpdater.checkForUpdatesAndNotify();
 
-  app.dock.hide();
+  if(process.platform === "win32" ){
+      // code for window platform
+  }else{
+      // TODO: check on other platform
+      app.dock.hide();
+  }
 
   app.on("ready", () => {
     const translateWindow = createGoogleTranslateWindow();
