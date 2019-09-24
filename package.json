@@ -5,12 +5,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "build": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --win --linux",
+    "release": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --windows --linux --publish always",
     "lint": "eslint ."
   },
   "dependencies": {
-    "electron-json-storage": "^4.1.8"
+    "electron-json-storage": "^4.1.8",
+    "electron-updater": "^4.1.2"
   },
   "devDependencies": {
     "electron": "^6.0.10",

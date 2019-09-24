@@ -2,6 +2,7 @@
 
 const { app, ipcMain, globalShortcut, clipboard } = require("electron");
 const storage = require("electron-json-storage");
+const { autoUpdater } = require("electron-updater");
 
 const { createGoogleTranslateWindow } = require("./googleTranslateWindow");
 const { createTray } = require("./tray");
@@ -25,6 +26,7 @@ function startApp() {
     path: app.getPath("exe"),
     args: ["--processStart", "--process-start-args", `"--hidden"`]
   });
+  autoUpdater.checkForUpdatesAndNotify();
 
   app.dock.hide();
 
