@@ -10,7 +10,7 @@ _Hotkey for google translate_
 
 ## Installing
 
-Download installer from [here](https://github.com/sudhirt4/hotkey-translate/releases/download/0.0.0/easy-translate-1.0.0.dmg)
+Download installer from [here](https://github.com/sudhirt4/hotkey-translate/releases/download/0.0.1/easy-translate--0.0.1.dmg)
 
 ## Usage
 
