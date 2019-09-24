@@ -19,6 +19,13 @@ function closeApp() {
 }
 
 function startApp() {
+  app.setLoginItemSettings({
+    openAtLogin: true,
+    openAsHidden: true,
+    path: app.getPath("exe"),
+    args: ["--processStart", "--process-start-args", `"--hidden"`]
+  });
+
   app.dock.hide();
 
   app.on("ready", () => {
