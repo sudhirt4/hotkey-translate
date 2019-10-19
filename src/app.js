@@ -1,13 +1,12 @@
 "use strict";
 
 const { app, ipcMain, globalShortcut, clipboard } = require("electron");
-const storage = require("electron-json-storage");
 const { autoUpdater } = require("electron-updater");
 
 const { createGoogleTranslateWindow } = require("./googleTranslateWindow");
 const { createTray } = require("./tray");
 const { GOOGLE_TRANSLATE_URL } = require("./config");
-const { createSettingsWindow } = require("./settingsWindow");
+const { DEFAULT_HOTKEY } = require("./config");
 
 function showWindow(window, { position }) {
   window.setPosition(position.x, position.y, false);
@@ -28,29 +27,17 @@ function startApp() {
   });
   autoUpdater.checkForUpdatesAndNotify();
 
-  app.dock.hide();
-
   app.on("ready", () => {
+    app.dock.hide();
+
     const translateWindow = createGoogleTranslateWindow();
     const tray = createTray();
 
-    // TODO : Customized control setup
-    createSettingsWindow();
+    globalShortcut.register(DEFAULT_HOTKEY, () => {
+      const text = clipboard.readText();
+      translateWindow.loadURL(GOOGLE_TRANSLATE_URL.replace(":text", text));
 
-    storage.get("userConfig", function(
-      error,
-      { shortcutKeys = "CommandOrControl+Shift+0" }
-    ) {
-      if (error) {
-        throw error;
-      }
-
-      globalShortcut.register(shortcutKeys, () => {
-        const text = clipboard.readText();
-        translateWindow.loadURL(GOOGLE_TRANSLATE_URL.replace(":text", text));
-
-        ipcMain.emit("show-translate-window");
-      });
+      ipcMain.emit("show-translate-window");
     });
 
     ipcMain.on("show-translate-window", () => {

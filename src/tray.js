@@ -6,7 +6,7 @@ const path = require("path");
 function createTray() {
   const tray = new Tray(path.resolve(__dirname, "../assets/flagTemplate.png"));
 
-  const contextMenu = Menu.buildFromTemplate([
+  const template = [
     {
       label: "Open",
       click: () => {
@@ -19,13 +19,15 @@ function createTray() {
         ipcMain.emit("close-app");
       }
     }
-  ]);
+  ];
+
+  const contextMenu = Menu.buildFromTemplate(template);
 
   contextMenu.on("menu-will-show", () => {
     ipcMain.emit("hide-translate-window");
   });
 
-  tray.setToolTip("Easy Translate");
+  tray.setToolTip("Hotkey Translate");
   tray.setContextMenu(contextMenu);
 
   return tray;
